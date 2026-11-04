@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FINAE PMO Social | Seguimiento ágil para tu fondo de responsabilidad social</title>
+<meta name="description" content="Oficina de Gestión de Proyectos (PMO) que da seguimiento ágil al capital semilla y a los proyectos sociales de tu empresa, con resultados medibles.">
+<style>
+  :root{
+    --verde:#0f3d3e; --verde2:#14595a; --ambar:#f2a900; --crema:#faf7f0;
+    --texto:#1d2b2b; --gris:#5b6b6b; --borde:#e3ddcf; --blanco:#fff;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;color:var(--texto);background:var(--crema);line-height:1.6}
+  img,svg{max-width:100%}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{line-height:1.2;color:var(--verde)}
+  h2{font-size:clamp(1.6rem,4vw,2.2rem);margin-bottom:12px}
+  .sub{color:var(--gris);max-width:640px;margin-bottom:32px}
+  section{padding:72px 0}
+  .btn{display:inline-block;background:var(--ambar);color:#1d1d1d;font-weight:700;padding:14px 26px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;font-size:1rem;transition:transform .15s,box-shadow .15s}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.18)}
+  .btn.sec{background:transparent;color:var(--blanco);border:2px solid rgba(255,255,255,.6)}
+  .btn.out{background:var(--blanco);border:2px solid var(--verde);color:var(--verde)}
+
+  /* Nav */
+  header{background:var(--verde);position:sticky;top:0;z-index:20}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{color:var(--blanco);font-weight:800;font-size:1.2rem;letter-spacing:.5px}
+  .logo span{color:var(--ambar)}
+  .nav a.cta-nav{background:var(--ambar);color:#1d1d1d;padding:8px 16px;border-radius:8px;font-weight:700;text-decoration:none;font-size:.9rem}
+
+  /* Hero */
+  .hero{background:linear-gradient(135deg,var(--verde) 0%,var(--verde2) 100%);color:var(--blanco);padding:84px 0 92px}
+  .hero h1{color:var(--blanco);font-size:clamp(2rem,6vw,3.2rem);max-width:780px;margin-bottom:18px}
+  .hero h1 em{font-style:normal;color:var(--ambar)}
+  .hero p{max-width:620px;font-size:1.1rem;opacity:.92;margin-bottom:30px}
+  .hero .acciones{display:flex;gap:14px;flex-wrap:wrap}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;margin-top:52px;max-width:760px}
+  .stat{background:rgba(255,255,255,.1);border-radius:12px;padding:16px}
+  .stat b{display:block;font-size:1.6rem;color:var(--ambar)}
+  .stat small{opacity:.85}
+
+  /* Cards */
+  .grid{display:grid;gap:20px}
+  .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+  .g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+  .card{background:var(--blanco);border:1px solid var(--borde);border-radius:14px;padding:26px}
+  .card h3{font-size:1.1rem;margin-bottom:8px}
+  .card p{color:var(--gris);font-size:.96rem}
+  .icono{width:46px;height:46px;border-radius:12px;background:var(--verde);color:var(--ambar);display:flex;align-items:center;justify-content:center;font-size:1.4rem;margin-bottom:14px}
+
+  .problema{background:var(--blanco)}
+  .problema .card{background:var(--crema)}
+  .comparativa{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:8px}
+  .antes,.ahora{border-radius:14px;padding:26px}
+  .antes{background:#fff4f1;border:1px solid #f1d2c9}
+  .ahora{background:#eef7f1;border:1px solid #cfe5d6}
+  .antes h3{color:#a8402b}
+  .comparativa ul{list-style:none;margin-top:10px}
+  .comparativa li{padding:6px 0 6px 26px;position:relative;font-size:.96rem}
+  .antes li::before{content:"✕";position:absolute;left:0;color:#a8402b;font-weight:700}
+  .ahora li::before{content:"✓";position:absolute;left:0;color:#1f7a45;font-weight:700}
+
+  /* Proceso */
+  .pasos{counter-reset:paso;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+  .paso{position:relative;background:var(--blanco);border:1px solid var(--borde);border-radius:14px;padding:28px 22px 22px}
+  .paso::before{counter-increment:paso;content:counter(paso);position:absolute;top:-16px;left:20px;background:var(--ambar);width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .paso h3{font-size:1.05rem;margin-bottom:6px}
+  .paso p{color:var(--gris);font-size:.94rem}
+
+  .beneficios{background:var(--verde);color:var(--blanco)}
+  .beneficios h2{color:var(--blanco)}
+  .beneficios .sub{color:rgba(255,255,255,.8)}
+  .beneficios .card{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15)}
+  .beneficios .card h3{color:var(--ambar)}
+  .beneficios .card p{color:rgba(255,255,255,.85)}
+
+  /* CTA */
+  .cta{background:var(--blanco)}
+  .cta-box{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:36px;align-items:start}
+  .kit{background:var(--crema);border:2px dashed var(--ambar);border-radius:14px;padding:26px;margin-top:20px}
+  .kit h3{margin-bottom:6px}
+  form{background:var(--crema);border:1px solid var(--borde);border-radius:14px;padding:26px}
+  label{display:block;font-weight:600;font-size:.9rem;margin:14px 0 6px}
+  input,select{width:100%;padding:12px;border:1px solid #cfc8b6;border-radius:8px;font-size:1rem;font-family:inherit;background:#fff}
+  input:focus,select:focus{outline:2px solid var(--ambar);border-color:var(--ambar)}
+  .check{display:flex;gap:10px;align-items:flex-start;margin:18px 0}
+  .check input{width:auto;margin-top:5px}
+  .check label{margin:0;font-weight:400}
+  form .btn{width:100%;margin-top:6px}
+  .msg{display:none;margin-top:16px;padding:14px;border-radius:10px;background:#eef7f1;border:1px solid #cfe5d6;color:#1f5a38}
+
+  /* Panel de validación */
+  .panel{background:#10201f;color:#dfe9e8;padding:46px 0;display:none}
+  .panel.visible{display:block}
+  .panel h2{color:var(--ambar);font-size:1.4rem}
+  .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px;margin:20px 0}
+  .kpi{background:rgba(255,255,255,.07);border-radius:12px;padding:18px}
+  .kpi b{display:block;font-size:1.9rem;color:var(--ambar)}
+  .kpi small{opacity:.85}
+  .panel button{background:transparent;color:#dfe9e8;border:1px solid #5d7370;padding:8px 14px;border-radius:8px;cursor:pointer}
+
+  footer{background:#0a2223;color:rgba(255,255,255,.7);padding:30px 0;text-align:center;font-size:.9rem}
+  footer a{color:var(--ambar);cursor:pointer;text-decoration:underline}
+  @media(max-width:600px){section{padding:54px 0}.hero{padding:60px 0 64px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo">FINAE <span>PMO Social</span></div>
+    <a class="cta-nav" href="#contacto" data-evento="clic_cta">Solicitar diagnóstico</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Convierte tu fondo de responsabilidad social en <em>proyectos que perduran</em></h1>
+    <p>Somos una Oficina de Gestión de Proyectos (PMO) que acompaña con metodologías ágiles cada emprendimiento o iniciativa que tu empresa financia, y te entrega resultados medibles.</p>
+    <div class="acciones">
+      <a class="btn" href="#contacto" data-evento="clic_cta">Quiero un diagnóstico gratuito</a>
+      <a class="btn sec" href="#problema">Ver cómo funciona</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>Ágil</b><small>Sprints mensuales con metas claras</small></div>
+      <div class="stat"><b>Medible</b><small>Indicadores y reportes de impacto</small></div>
+      <div class="stat"><b>Con respaldo</b><small>Supervisión docente universitaria</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="wrap">
+    <h2>El dinero se entrega, pero nadie verifica si funcionó</h2>
+    <p class="sub">Muchas empresas financian capital semilla, talleres o proyectos comunitarios. Sin seguimiento, la inversión se diluye y el impacto nunca se demuestra.</p>
+    <div class="comparativa">
+      <div class="antes">
+        <h3>Hoy, en la mayoría de casos</h3>
+        <ul>
+          <li>Capacitación de corta duración (aprox. 1 mes) y luego el abandono</li>
+          <li>Nadie revisa si el emprendimiento sigue funcionando</li>
+          <li>Proyectos dispersos, sin gestión centralizada</li>
+          <li>Sin indicadores ni reportes para el directorio</li>
+        </ul>
+      </div>
+      <div class="ahora">
+        <h3>Con la PMO de FINAE</h3>
+        <ul>
+          <li>Capacitación financiera inicial + acompañamiento continuo</li>
+          <li>Seguimiento por sprints y tablero visible del avance</li>
+          <li>Todos tus proyectos sociales en una sola oficina</li>
+          <li>Reportes trimestrales de resultados para tu empresa</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICO -->
+<section>
+  <div class="wrap">
+    <h2>¿Para quién es?</h2>
+    <p class="sub">Medianas empresas que ya invierten en lo social, pero necesitan orden y evidencia.</p>
+    <div class="grid g2">
+      <div class="card"><div class="icono">🏢</div><h3>Empresas con área de RSC</h3><p>Con presupuesto de responsabilidad social y varios proyectos en simultáneo, sin una gestión centralizada.</p></div>
+      <div class="card"><div class="icono">🤝</div><h3>Fundaciones corporativas</h3><p>Que entregan capital semilla o becas a comunidades y necesitan comprobar que el dinero genera resultados.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section style="background:var(--blanco)">
+  <div class="wrap">
+    <h2>Qué hacemos por tu empresa</h2>
+    <p class="sub">Un servicio integral para que cada sol invertido en lo social tenga seguimiento y resultados.</p>
+    <div class="grid g4">
+      <div class="card"><div class="icono">📈</div><h3>Seguimiento ágil</h3><p>Acompañamos cada emprendimiento con Scrum y Kanban: metas mensuales, tablero de avance y retrospectivas.</p></div>
+      <div class="card"><div class="icono">🎓</div><h3>Educación financiera</h3><p>Talleres iniciales que sirven de base, seguidos de asesoría para que el negocio se sostenga en el tiempo.</p></div>
+      <div class="card"><div class="icono">📊</div><h3>Medición de impacto</h3><p>Indicadores de ventas, empleo y continuidad, con kits de evaluación para validar el retorno.</p></div>
+      <div class="card"><div class="icono">🗂️</div><h3>Gestión del conocimiento</h3><p>Repositorio digital y guías estandarizadas para que nada se pierda cuando cambia el equipo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section>
+  <div class="wrap">
+    <h2>Cómo trabajamos</h2>
+    <p class="sub">Un proceso simple, de cuatro pasos.</p>
+    <div class="pasos" style="margin-top:28px">
+      <div class="paso"><h3>Diagnóstico</h3><p>Conversamos 15 minutos sobre tu fondo y tus proyectos actuales.</p></div>
+      <div class="paso"><h3>Propuesta</h3><p>Diseñamos el plan de seguimiento y los indicadores de éxito.</p></div>
+      <div class="paso"><h3>Ejecución ágil</h3><p>Sprints mensuales con acompañamiento a cada emprendimiento.</p></div>
+      <div class="paso"><h3>Reporte</h3><p>Entregamos resultados trimestrales listos para tu directorio.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section class="beneficios">
+  <div class="wrap">
+    <h2>Beneficios para tu empresa</h2>
+    <p class="sub">Más impacto, más transparencia, menos esfuerzo interno.</p>
+    <div class="grid g4">
+      <div class="card"><h3>Trazabilidad</h3><p>Sabes en qué se usó cada sol y qué resultados produjo.</p></div>
+      <div class="card"><h3>Reputación</h3><p>Evidencia real de impacto social para comunicar con respaldo.</p></div>
+      <div class="card"><h3>Respaldo académico</h3><p>Equipo de estudiantes de ingeniería con supervisión docente.</p></div>
+      <div class="card"><h3>Costo accesible</h3><p>Una PMO sin necesidad de crear un área nueva en tu organización.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contacto">
+  <div class="wrap cta-box">
+    <div>
+      <h2>Empieza con un diagnóstico gratuito</h2>
+      <p class="sub" style="margin-bottom:0">En 15 minutos revisamos cómo gestionas hoy tu fondo social y te mostramos cómo una PMO podría darle seguimiento.</p>
+      <div class="kit">
+        <h3>🎁 Kit de Evaluación de Proyectos (muestra gratis)</h3>
+        <p style="color:var(--gris);margin-bottom:14px;font-size:.95rem">Plantilla de seguimiento con indicadores para medir si un emprendimiento financiado está dando resultados.</p>
+        <button class="btn out" id="btnKit" type="button">Descargar muestra</button>
+      </div>
+    </div>
+
+    <form id="formulario" novalidate>
+      <h3 style="margin-bottom:4px">Solicita tu diagnóstico</h3>
+      <label for="nombre">Nombre completo</label>
+      <input id="nombre" name="nombre" type="text" required placeholder="Ej. María Torres">
+      <label for="empresa">Empresa</label>
+      <input id="empresa" name="empresa" type="text" required placeholder="Nombre de tu empresa">
+      <label for="cargo">Cargo</label>
+      <input id="cargo" name="cargo" type="text" placeholder="Ej. Jefa de RSC">
+      <label for="correo">Correo corporativo</label>
+      <input id="correo" name="correo" type="email" required placeholder="nombre@empresa.com">
+      <label for="fondo">¿Cuenta con fondo de responsabilidad social?</label>
+      <select id="fondo" name="fondo" required>
+        <option value="">Selecciona una opción</option>
+        <option value="si">Sí, ya contamos con un fondo</option>
+        <option value="evaluando">Lo estamos evaluando</option>
+        <option value="no">Aún no</option>
+      </select>
+      <div class="check">
+        <input id="reunion" type="checkbox">
+        <label for="reunion">Quiero agendar el diagnóstico gratuito de 15 minutos</label>
+      </div>
+      <button class="btn" type="submit">Enviar solicitud</button>
+      <div class="msg" id="msg">¡Gracias! Recibimos tu solicitud y te contactaremos pronto.</div>
+    </form>
+  </div>
+</section>
+
+<!-- PANEL DE VALIDACION (LEAN STARTUP) -->
+<section class="panel" id="panel">
+  <div class="wrap">
+    <h2>Panel de validación (Lean Startup)</h2>
+    <p style="opacity:.8">Datos guardados en este navegador. Úsalos para demostrar la medición en la exposición.</p>
+    <div class="kpis">
+      <div class="kpi"><b id="kVisitas">0</b><small>Visitas</small></div>
+      <div class="kpi"><b id="kLeads">0</b><small>Leads (descargas del kit + solicitudes)</small></div>
+      <div class="kpi"><b id="kConv">0%</b><small>Indicador 1: tasa de conversión (leads ÷ visitas)</small></div>
+      <div class="kpi"><b id="kReu">0</b><small>Indicador 2: reuniones solicitadas</small></div>
+    </div>
+    <button type="button" id="btnReset">Reiniciar datos</button>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 FINAE PMO Social · Proyecto académico de validación de MVP · Universidad de Piura</p>
+    <p style="margin-top:8px"><a id="verPanel">Ver panel de validación</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY = "finae_pmo_metricas";
+  function leer(){
+    try { return JSON.parse(localStorage.getItem(KEY)) || {visitas:0,leads:0,reuniones:0,clics:0}; }
+    catch(e){ return {visitas:0,leads:0,reuniones:0,clics:0}; }
+  }
+  function guardar(d){ try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+  function pintar(){
+    var d = leer();
+    document.getElementById("kVisitas").textContent = d.visitas;
+    document.getElementById("kLeads").textContent = d.leads;
+    document.getElementById("kReu").textContent = d.reuniones;
+    var conv = d.visitas ? ((d.leads / d.visitas) * 100).toFixed(1) : 0;
+    document.getElementById("kConv").textContent = conv + "%";
+  }
+
+  // Contar visita (una vez por sesión)
+  try{
+    if(!sessionStorage.getItem("finae_visita")){
+      var d0 = leer(); d0.visitas++; guardar(d0);
+      sessionStorage.setItem("finae_visita","1");
+    }
+  }catch(e){}
+
+  // Clics en CTA
+  document.querySelectorAll("[data-evento='clic_cta']").forEach(function(el){
+    el.addEventListener("click", function(){ var d = leer(); d.clics++; guardar(d); pintar(); });
+  });
+
+  // Descarga del kit (lead magnet de muestra)
+  document.getElementById("btnKit").addEventListener("click", function(){
+    var csv = "Indicador,Descripcion,Frecuencia,Meta,Resultado\n" +
+      "Continuidad del negocio,Emprendimientos que siguen operando,Mensual,90%,\n" +
+      "Ventas mensuales,Ingresos promedio del emprendimiento,Mensual,,\n" +
+      "Empleos generados,Personas empleadas por el emprendimiento,Trimestral,,\n" +
+      "Cumplimiento de sprint,Metas del sprint cumplidas,Mensual,80%,\n" +
+      "Uso del capital semilla,Porcentaje ejecutado segun plan,Mensual,100%,\n";
+    var blob = new Blob(["\ufeff"+csv], {type:"text/csv;charset=utf-8;"});
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "Kit_Evaluacion_Proyectos_FINAE_muestra.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    var d = leer(); d.leads++; guardar(d); pintar();
+  });
+
+  // Formulario
+  document.getElementById("formulario").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = e.target;
+    var ok = f.nombre.value.trim() && f.empresa.value.trim() && /\S+@\S+\.\S+/.test(f.correo.value) && f.fondo.value;
+    if(!ok){ alert("Completa nombre, empresa, un correo válido y si cuenta con fondo social."); return; }
+    var d = leer(); d.leads++;
+    if(document.getElementById("reunion").checked) d.reuniones++;
+    guardar(d); pintar();
+    document.getElementById("msg").style.display = "block";
+    f.reset();
+  });
+
+  // Panel
+  document.getElementById("verPanel").addEventListener("click", function(){
+    var p = document.getElementById("panel");
+    p.classList.toggle("visible"); pintar();
+    if(p.classList.contains("visible")) p.scrollIntoView({behavior:"smooth"});
+  });
+  document.getElementById("btnReset").addEventListener("click", function(){
+    if(confirm("¿Reiniciar todos los datos?")){ guardar({visitas:0,leads:0,reuniones:0,clics:0}); pintar(); }
+  });
+  pintar();
+})();
+</script>
+</body>
+</html>
